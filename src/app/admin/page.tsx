@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { getSupabase } from "@/lib/supabase";
 
 interface Submission {
@@ -12,20 +13,37 @@ interface Submission {
   address_city: string;
   address_state: string;
   status: string;
-  services: string[];
+  template: string | null;
+  deployed_url: string | null;
   logo_url: string;
 }
 
-export default function AdminPage() {
+const STATUS_STYLES: Record<string, string> = {
+  new: "bg-green-100 text-green-700",
+  reviewing: "bg-yellow-100 text-yellow-700",
+  building: "bg-blue-100 text-blue-700",
+  live: "bg-purple-100 text-purple-700",
+  paused: "bg-gray-100 text-gray-600",
+};
+
+const TEMPLATE_LABELS: Record<string, string> = {
+  heritage: "Heritage",
+  momentum: "Momentum",
+  prestige: "Prestige",
+};
+
+export default function AdminDashboard() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selected, setSelected] = useState<Record<string, unknown> | null>(null);
+  const [filter, setFilter] = useState<string>("all");
 
   useEffect(() => {
     async function load() {
       const { data } = await getSupabase()
         .from("submissions")
-        .select("*")
+        .select(
+          "id, created_at, agency_name, email, phone, address_city, address_state, status, template, deployed_url, logo_url"
+        )
         .order("created_at", { ascending: false });
       setSubmissions((data as Submission[]) || []);
       setLoading(false);
@@ -33,159 +51,179 @@ export default function AdminPage() {
     load();
   }, []);
 
-  async function loadFull(id: string) {
-    const { data } = await getSupabase()
-      .from("submissions")
-      .select("*")
-      .eq("id", id)
-      .single();
-    setSelected(data as Record<string, unknown>);
-  }
+  const filtered =
+    filter === "all"
+      ? submissions
+      : submissions.filter((s) => s.status === filter);
+
+  const counts = {
+    all: submissions.length,
+    new: submissions.filter((s) => s.status === "new").length,
+    reviewing: submissions.filter((s) => s.status === "reviewing").length,
+    building: submissions.filter((s) => s.status === "building").length,
+    live: submissions.filter((s) => s.status === "live").length,
+  };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-gray-500">
-        Loading submissions...
+      <div className="flex items-center justify-center min-h-screen text-gray-500">
+        Loading...
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div>
+      {/* Header */}
       <header className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
-          <h1 className="font-[family-name:var(--font-heading)] text-2xl text-gray-900">
-            Client Submissions
+        <div className="px-8 py-6">
+          <h1 className="text-2xl font-semibold text-gray-900">
+            Agency Dashboard
           </h1>
           <p className="text-gray-500 text-sm mt-1">
-            {submissions.length} total submission{submissions.length !== 1 && "s"}
+            Manage agency submissions, pick templates, and deploy sites.
           </p>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-        {submissions.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">
-            No submissions yet. Share your intake form link with clients!
+      {/* Stats cards */}
+      <div className="px-8 py-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+          {(
+            [
+              ["all", "Total", "bg-gray-900"],
+              ["new", "New", "bg-green-600"],
+              ["reviewing", "Reviewing", "bg-yellow-600"],
+              ["building", "Building", "bg-blue-600"],
+              ["live", "Live", "bg-purple-600"],
+            ] as const
+          ).map(([key, label, bg]) => (
+            <button
+              key={key}
+              onClick={() => setFilter(key)}
+              className={`p-4 rounded-xl border transition-all cursor-pointer ${
+                filter === key
+                  ? "border-blue-500 bg-blue-50 shadow-sm"
+                  : "border-gray-200 bg-white hover:border-gray-300"
+              }`}
+            >
+              <div className="flex items-center gap-2 mb-1">
+                <div className={`w-2 h-2 rounded-full ${bg}`} />
+                <span className="text-xs text-gray-500 uppercase tracking-wide">
+                  {label}
+                </span>
+              </div>
+              <span className="text-2xl font-semibold text-gray-900">
+                {counts[key]}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Agencies table */}
+        {filtered.length === 0 ? (
+          <div className="text-center py-20 text-gray-400 bg-white rounded-xl border border-gray-200">
+            {filter === "all"
+              ? "No submissions yet. Share your onboarding form link with agencies."
+              : `No agencies with status "${filter}".`}
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Submissions list */}
-            <div className="lg:col-span-1 space-y-3">
-              {submissions.map((sub) => (
-                <button
-                  key={sub.id}
-                  onClick={() => loadFull(sub.id)}
-                  className={`w-full text-left p-4 rounded-xl border transition-colors cursor-pointer ${
-                    selected && (selected as Record<string, unknown>).id === sub.id
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-200 bg-white hover:border-gray-300"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="font-medium text-gray-900 text-sm">
-                      {sub.agency_name}
-                    </span>
-                    <span
-                      className={`text-xs px-2 py-0.5 rounded-full ${
-                        sub.status === "new"
-                          ? "bg-green-100 text-green-700"
-                          : sub.status === "building"
-                            ? "bg-yellow-100 text-yellow-700"
-                            : "bg-gray-100 text-gray-600"
-                      }`}
-                    >
-                      {sub.status}
-                    </span>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    {sub.address_city}, {sub.address_state} &middot;{" "}
-                    {new Date(sub.created_at).toLocaleDateString()}
-                  </p>
-                </button>
-              ))}
-            </div>
-
-            {/* Detail view */}
-            <div className="lg:col-span-2">
-              {selected ? (
-                <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h2 className="font-[family-name:var(--font-heading)] text-xl text-gray-900">
-                        {selected.agency_name as string}
-                      </h2>
-                      <p className="text-gray-500 text-sm">
-                        Submitted{" "}
-                        {new Date(
-                          selected.created_at as string
-                        ).toLocaleString()}
-                      </p>
-                    </div>
-                    {typeof selected.logo_url === "string" && selected.logo_url && (
-                      <img
-                        src={selected.logo_url}
-                        alt="Logo"
-                        className="h-12 w-auto"
-                      />
-                    )}
-                  </div>
-
-                  {/* Render all fields */}
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    {Object.entries(selected).map(([key, value]) => {
-                      if (
-                        key === "id" ||
-                        key === "created_at" ||
-                        !value ||
-                        (typeof value === "string" && !value.trim())
-                      )
-                        return null;
-                      return (
-                        <div
-                          key={key}
-                          className={`${
-                            typeof value === "object" ? "col-span-2" : ""
-                          }`}
-                        >
-                          <span className="text-gray-400 text-xs uppercase tracking-wide">
-                            {key.replace(/_/g, " ")}
-                          </span>
-                          <div className="text-gray-900 mt-0.5">
-                            {typeof value === "object" ? (
-                              <pre className="bg-gray-50 p-3 rounded-lg text-xs overflow-auto">
-                                {JSON.stringify(value, null, 2)}
-                              </pre>
-                            ) : typeof value === "boolean" ? (
-                              value ? "Yes" : "No"
-                            ) : typeof value === "string" &&
-                              value.startsWith("http") ? (
-                              <a
-                                href={value}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline break-all"
-                              >
-                                {value}
-                              </a>
-                            ) : (
-                              String(value)
-                            )}
+          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-200 text-left">
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Agency
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Location
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Template
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Status
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Submitted
+                  </th>
+                  <th className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {filtered.map((sub) => (
+                  <tr
+                    key={sub.id}
+                    className="hover:bg-gray-50 transition-colors"
+                  >
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        {sub.logo_url ? (
+                          <img
+                            src={sub.logo_url}
+                            alt=""
+                            className="w-8 h-8 rounded object-contain bg-gray-100"
+                          />
+                        ) : (
+                          <div className="w-8 h-8 rounded bg-blue-100 flex items-center justify-center text-blue-600 font-semibold text-xs">
+                            {sub.agency_name
+                              .split(" ")
+                              .map((w) => w[0])
+                              .join("")
+                              .slice(0, 2)}
                           </div>
+                        )}
+                        <div>
+                          <p className="font-medium text-gray-900 text-sm">
+                            {sub.agency_name}
+                          </p>
+                          <p className="text-gray-400 text-xs">{sub.email}</p>
                         </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center py-20 text-gray-400">
-                  Select a submission to view details.
-                </div>
-              )}
-            </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-600">
+                      {sub.address_city}, {sub.address_state}
+                    </td>
+                    <td className="px-6 py-4">
+                      {sub.template ? (
+                        <span className="text-sm font-medium text-gray-700">
+                          {TEMPLATE_LABELS[sub.template] || sub.template}
+                        </span>
+                      ) : (
+                        <span className="text-xs text-gray-400">
+                          Not selected
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`text-xs px-2.5 py-1 rounded-full font-medium ${
+                          STATUS_STYLES[sub.status] || STATUS_STYLES.new
+                        }`}
+                      >
+                        {sub.status || "new"}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {new Date(sub.created_at).toLocaleDateString()}
+                    </td>
+                    <td className="px-6 py-4">
+                      <Link
+                        href={`/admin/${sub.id}`}
+                        className="text-blue-600 text-sm font-medium hover:underline"
+                      >
+                        Manage →
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }

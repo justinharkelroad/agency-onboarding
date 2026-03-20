@@ -105,7 +105,7 @@ export function generateConfigTS(agency: AgencyData): string {
   const slug = agencySlug(agency.agency_name);
   const siteUrl = agency.domain_preferred
     ? `https://${agency.domain_preferred.replace(/^https?:\/\//, "")}`
-    : `https://${slug}.agencybrain.com`;
+    : `https://${slug}.agencybrainpages.com`;
 
   const services = (agency.services || []).map((s) => ({
     title: s,

@@ -257,7 +257,7 @@ export async function POST(request: Request) {
     const deploymentUrl = `https://${deployment.url}`;
 
     // 9. Also try custom domain (will silently fail if not owned)
-    const subdomain = `${slug}.agencybrain.com`;
+    const subdomain = `${slug}.agencybrainpages.com`;
     await assignDomain(projectId, subdomain, vercelToken, teamId);
 
     // 10. Update database with the direct deployment URL

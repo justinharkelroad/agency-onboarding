@@ -18,6 +18,30 @@ export const metadata: Metadata = {
   title: "AgencyBrain Pages | Insurance Websites That Actually Sell",
   description:
     "Premium, conversion-optimized websites for P&C insurance agencies. 9 templates, 48-hour launch, built around your brand.",
+  metadataBase: new URL("https://agencybrainpages.com"),
+  openGraph: {
+    title: "Insurance Websites That Actually Sell",
+    description:
+      "Premium, conversion-optimized websites for P&C insurance agencies. 9 templates. Live in 48 hours.",
+    url: "https://agencybrainpages.com",
+    siteName: "AgencyBrain Pages",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "AgencyBrain Pages — Insurance Websites That Actually Sell",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Insurance Websites That Actually Sell",
+    description:
+      "Premium, conversion-optimized websites for P&C insurance agencies. 9 templates. Live in 48 hours.",
+    images: ["/api/og"],
+  },
 };
 
 export default function RootLayout({

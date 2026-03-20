@@ -17,17 +17,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // 1. Save to database
-    const supabase = getSupabaseAdmin();
-    const { error } = await supabase.from("leads").insert({
-      name,
-      email,
-      agency_name: agency,
-      phone: phone || null,
-    });
-
-    if (error) {
-      console.error("Lead save error:", error);
+    // 1. Save to database (non-blocking — emails still send if DB fails)
+    try {
+      const supabase = getSupabaseAdmin();
+      const { error } = await supabase.from("leads").insert({
+        name,
+        email,
+        agency_name: agency,
+        phone: phone || null,
+      });
+      if (error) console.error("Lead save error:", error);
+    } catch (dbErr) {
+      console.error("Lead DB error:", dbErr);
     }
 
     // 2. Send confirmation email to the lead

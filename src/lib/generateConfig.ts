@@ -203,6 +203,9 @@ const config: AgencyConfig = {
 
   formspreeId: ${JSON.stringify(agency.formspree_id || "REPLACE_ME")},
   gaMeasurementId: ${JSON.stringify(agency.ga_measurement_id || "")},
+  googleAdsId: ${JSON.stringify((agency as any).google_ads_id || "")},
+  googleAdsCallLabel: ${JSON.stringify((agency as any).google_ads_call_label || "")},
+  googleAdsFormLabel: ${JSON.stringify((agency as any).google_ads_form_label || "")},
 };
 
 export default config;

@@ -27,6 +27,9 @@ export default function ConfigGenerator({
     (agency.service_areas || []).join(", ")
   );
   const [gaId, setGaId] = useState(agency.ga_measurement_id || "");
+  const [googleAdsId, setGoogleAdsId] = useState((agency as any).google_ads_id || "");
+  const [googleAdsCallLabel, setGoogleAdsCallLabel] = useState((agency as any).google_ads_call_label || "");
+  const [googleAdsFormLabel, setGoogleAdsFormLabel] = useState((agency as any).google_ads_form_label || "");
   const [deployedUrl, setDeployedUrl] = useState(agency.deployed_url || "");
 
   const configOutput = generateConfigTS(agency);
@@ -47,6 +50,9 @@ export default function ConfigGenerator({
         .filter(Boolean)
     );
     onUpdateField("ga_measurement_id", gaId || null);
+    onUpdateField("google_ads_id", googleAdsId || null);
+    onUpdateField("google_ads_call_label", googleAdsCallLabel || null);
+    onUpdateField("google_ads_form_label", googleAdsFormLabel || null);
     onUpdateField("deployed_url", deployedUrl || null);
   }
 
@@ -187,6 +193,45 @@ export default function ConfigGenerator({
               value={gaId}
               onChange={(e) => setGaId(e.target.value)}
               placeholder="G-XXXXXXXXXX"
+              className="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Google Ads ID
+            </label>
+            <input
+              type="text"
+              value={googleAdsId}
+              onChange={(e) => setGoogleAdsId(e.target.value)}
+              placeholder="AW-1234567890"
+              className="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Ads Call Conversion Label
+            </label>
+            <input
+              type="text"
+              value={googleAdsCallLabel}
+              onChange={(e) => setGoogleAdsCallLabel(e.target.value)}
+              placeholder="AbCdEfGhIjKl"
+              className="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Ads Form Conversion Label
+            </label>
+            <input
+              type="text"
+              value={googleAdsFormLabel}
+              onChange={(e) => setGoogleAdsFormLabel(e.target.value)}
+              placeholder="MnOpQrStUvWx"
               className="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

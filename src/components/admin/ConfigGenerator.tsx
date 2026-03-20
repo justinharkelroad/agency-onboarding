@@ -30,6 +30,8 @@ export default function ConfigGenerator({
   const [googleAdsId, setGoogleAdsId] = useState((agency as any).google_ads_id || "");
   const [googleAdsCallLabel, setGoogleAdsCallLabel] = useState((agency as any).google_ads_call_label || "");
   const [googleAdsFormLabel, setGoogleAdsFormLabel] = useState((agency as any).google_ads_form_label || "");
+  const [customHeadScripts, setCustomHeadScripts] = useState((agency as any).custom_head_scripts || "");
+  const [customBodyScripts, setCustomBodyScripts] = useState((agency as any).custom_body_scripts || "");
   const [deployedUrl, setDeployedUrl] = useState(agency.deployed_url || "");
 
   const configOutput = generateConfigTS(agency);
@@ -53,6 +55,8 @@ export default function ConfigGenerator({
     onUpdateField("google_ads_id", googleAdsId || null);
     onUpdateField("google_ads_call_label", googleAdsCallLabel || null);
     onUpdateField("google_ads_form_label", googleAdsFormLabel || null);
+    onUpdateField("custom_head_scripts", customHeadScripts || null);
+    onUpdateField("custom_body_scripts", customBodyScripts || null);
     onUpdateField("deployed_url", deployedUrl || null);
   }
 
@@ -234,6 +238,38 @@ export default function ConfigGenerator({
               placeholder="MnOpQrStUvWx"
               className="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Custom Head Scripts
+            </label>
+            <textarea
+              value={customHeadScripts}
+              onChange={(e) => setCustomHeadScripts(e.target.value)}
+              placeholder="Paste tracking scripts here (Metricool, Facebook Pixel, etc.)"
+              rows={3}
+              className="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Injected into &lt;head&gt;. Use for Metricool, HotJar, etc.
+            </p>
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Custom Body Scripts
+            </label>
+            <textarea
+              value={customBodyScripts}
+              onChange={(e) => setCustomBodyScripts(e.target.value)}
+              placeholder="Paste scripts for end of body (chat widgets, etc.)"
+              rows={3}
+              className="w-full border border-gray-300 rounded-lg py-2.5 px-4 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <p className="text-xs text-gray-400 mt-1">
+              Injected before &lt;/body&gt;. Use for chat widgets, Facebook Pixel, etc.
+            </p>
           </div>
 
           <div className="md:col-span-2">

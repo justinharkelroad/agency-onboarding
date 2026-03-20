@@ -207,6 +207,20 @@ export async function POST(request: Request) {
       if (file.path === "src/config.ts") {
         // Replace with generated config
         buffer = Buffer.from(configContent, "utf-8");
+      } else if (file.path === "index.html") {
+        // Inject custom scripts into index.html
+        let html = file.encoding === "base64"
+          ? Buffer.from(file.content, "base64").toString("utf-8")
+          : file.content;
+        const headScripts = (agency as any).custom_head_scripts || "";
+        const bodyScripts = (agency as any).custom_body_scripts || "";
+        if (headScripts) {
+          html = html.replace("</head>", `${headScripts}\n</head>`);
+        }
+        if (bodyScripts) {
+          html = html.replace("</body>", `${bodyScripts}\n</body>`);
+        }
+        buffer = Buffer.from(html, "utf-8");
       } else if (file.encoding === "base64") {
         buffer = Buffer.from(file.content, "base64");
       } else {

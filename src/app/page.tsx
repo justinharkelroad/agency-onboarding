@@ -66,7 +66,6 @@ export default function LandingPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
-    // Save lead to Supabase
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
@@ -77,35 +76,31 @@ export default function LandingPage() {
         setSubmitted(true);
       }
     } catch {
-      // Still show success — we don't want to block the UX
       setSubmitted(true);
     }
     setSubmitting(false);
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0F1A] text-white">
+    <div className="min-h-screen bg-[#0C0E14] text-white">
       {/* Nav */}
       <nav className="border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
-              <span className="text-[#0A0F1A] font-bold text-sm">AB</span>
-            </div>
-            <span className="font-semibold text-lg tracking-tight">
-              AgencyBrain<span className="text-amber-400">Pages</span>
-            </span>
-          </div>
+          <img
+            src="/logo.png"
+            alt="AgencyBrain Pages"
+            className="h-8 sm:h-10"
+          />
           <div className="flex items-center gap-4">
             <Link
               href="/onboard"
-              className="text-sm text-white/50 hover:text-white transition-colors"
+              className="hidden sm:inline text-sm text-white/40 hover:text-white transition-colors"
             >
-              Already a client? Start here
+              Client Portal
             </Link>
             <a
               href="#contact"
-              className="bg-amber-500 hover:bg-amber-400 text-[#0A0F1A] font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
+              className="bg-[#C4836A] hover:bg-[#D4937A] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
             >
               Get Started
             </a>
@@ -115,25 +110,24 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        {/* Gradient orbs */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-amber-500/8 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute top-20 right-1/4 w-[400px] h-[400px] bg-blue-500/6 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#C4836A]/8 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-40 right-1/4 w-[400px] h-[400px] bg-[#8B5E4B]/6 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-20 text-center relative">
           <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8">
-            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-sm text-white/60">Now accepting agencies for Q2 2026</span>
+            <span className="w-2 h-2 bg-[#C4836A] rounded-full animate-pulse" />
+            <span className="text-sm text-white/50">Now accepting agencies for Q2 2026</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6 max-w-4xl mx-auto">
             Insurance Websites
             <br />
-            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#C4836A] via-[#D4937A] to-[#B8755F] bg-clip-text text-transparent">
               That Actually Sell
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/45 max-w-2xl mx-auto mb-10 leading-relaxed">
             Premium, conversion-optimized websites for P&C insurance agencies.
             Fill out one form. We build, deploy, and launch your site in 48 hours.
           </p>
@@ -141,7 +135,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-16">
             <a
               href="#contact"
-              className="bg-amber-500 hover:bg-amber-400 text-[#0A0F1A] font-bold text-base px-8 py-4 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-amber-500/20"
+              className="bg-[#C4836A] hover:bg-[#D4937A] text-white font-bold text-base px-8 py-4 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#C4836A]/20"
             >
               Request a Preview
             </a>
@@ -160,10 +154,10 @@ export default function LandingPage() {
                 key={s.label}
                 className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5"
               >
-                <div className="text-2xl md:text-3xl font-bold text-amber-400 mb-1">
+                <div className="text-2xl md:text-3xl font-bold text-[#C4836A] mb-1">
                   {s.value}
                 </div>
-                <div className="text-xs text-white/40 uppercase tracking-wider">
+                <div className="text-xs text-white/35 uppercase tracking-wider">
                   {s.label}
                 </div>
               </div>
@@ -173,13 +167,13 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="border-t border-white/5 bg-[#0D1321]">
+      <section className="border-t border-white/5 bg-[#0E1018]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Not Another Template Mill
             </h2>
-            <p className="text-white/40 max-w-xl mx-auto">
+            <p className="text-white/35 max-w-xl mx-auto">
               Every site is configured with your real data — your team, your services,
               your brand colors. It&apos;s your agency, on a site that performs.
             </p>
@@ -189,13 +183,13 @@ export default function LandingPage() {
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-7 hover:border-white/10 transition-colors group"
+                className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-7 hover:border-[#C4836A]/20 transition-colors group"
               >
-                <div className="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 group-hover:bg-amber-500/15 transition-colors">
+                <div className="w-11 h-11 rounded-xl bg-[#C4836A]/10 text-[#C4836A] flex items-center justify-center mb-4 group-hover:bg-[#C4836A]/15 transition-colors">
                   {f.icon}
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed">{f.desc}</p>
+                <p className="text-white/35 text-sm leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -209,7 +203,7 @@ export default function LandingPage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               9 Templates. 3 Tiers.
             </h2>
-            <p className="text-white/40 max-w-xl mx-auto">
+            <p className="text-white/35 max-w-xl mx-auto">
               From clean and professional to cinematic and bold.
               Every template is fully responsive, SEO-optimized, and conversion-ready.
             </p>
@@ -219,7 +213,7 @@ export default function LandingPage() {
             {TEMPLATES.map((t) => (
               <div
                 key={t.name}
-                className="group bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden hover:border-white/15 transition-all hover:shadow-xl hover:shadow-amber-500/5"
+                className="group bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden hover:border-[#C4836A]/25 transition-all hover:shadow-xl hover:shadow-[#C4836A]/5"
               >
                 <div className="relative h-52 overflow-hidden bg-white/[0.02]">
                   <img
@@ -232,9 +226,9 @@ export default function LandingPage() {
                     <span
                       className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
                         t.tier === "Standard"
-                          ? "bg-blue-500/20 text-blue-300 border border-blue-500/20"
+                          ? "bg-white/10 text-white/70 border border-white/10"
                           : t.tier === "Premium"
-                          ? "bg-amber-500/20 text-amber-300 border border-amber-500/20"
+                          ? "bg-[#C4836A]/20 text-[#D4937A] border border-[#C4836A]/20"
                           : "bg-purple-500/20 text-purple-300 border border-purple-500/20"
                       }`}
                     >
@@ -245,7 +239,7 @@ export default function LandingPage() {
                 <div className="p-5">
                   <div className="flex items-center justify-between">
                     <span className="font-semibold">{t.name}</span>
-                    <span className="text-xs text-white/30">{t.desc}</span>
+                    <span className="text-xs text-white/25">{t.desc}</span>
                   </div>
                 </div>
               </div>
@@ -255,7 +249,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="border-t border-white/5 bg-[#0D1321]">
+      <section className="border-t border-white/5 bg-[#0E1018]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -269,29 +263,29 @@ export default function LandingPage() {
                 step: "01",
                 title: "Tell Us About Your Agency",
                 desc: "Fill out a quick form with your info, team, services, and branding. Upload your logo and photos.",
-                color: "from-blue-500 to-cyan-400",
+                color: "from-[#C4836A] to-[#A86B54]",
               },
               {
                 step: "02",
                 title: "We Build & You Preview",
                 desc: "We configure your chosen template with your real data and deploy a preview within 48 hours.",
-                color: "from-amber-400 to-orange-500",
+                color: "from-[#D4937A] to-[#C4836A]",
               },
               {
                 step: "03",
                 title: "Approve & Go Live",
                 desc: "Review your site, request any tweaks, and we push it live on your custom domain.",
-                color: "from-green-400 to-emerald-500",
+                color: "from-[#B8755F] to-[#9B6350]",
               },
             ].map((s) => (
               <div key={s.step} className="text-center">
                 <div
-                  className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} text-[#0A0F1A] font-bold text-lg mb-5`}
+                  className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} text-white font-bold text-lg mb-5`}
                 >
                   {s.step}
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{s.title}</h3>
-                <p className="text-white/40 text-sm leading-relaxed max-w-xs mx-auto">
+                <p className="text-white/35 text-sm leading-relaxed max-w-xs mx-auto">
                   {s.desc}
                 </p>
               </div>
@@ -308,17 +302,17 @@ export default function LandingPage() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Ready to Stand Out?
               </h2>
-              <p className="text-white/40">
+              <p className="text-white/35">
                 Tell us a bit about your agency and we&apos;ll reach out with a
                 personalized preview of what your site could look like.
               </p>
             </div>
 
             {submitted ? (
-              <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-10 text-center">
-                <div className="w-14 h-14 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-[#C4836A]/10 border border-[#C4836A]/20 rounded-2xl p-10 text-center">
+                <div className="w-14 h-14 bg-[#C4836A]/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg
-                    className="w-7 h-7 text-green-400"
+                    className="w-7 h-7 text-[#C4836A]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -340,7 +334,7 @@ export default function LandingPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm text-white/40 mb-1.5">
+                    <label className="block text-sm text-white/35 mb-1.5">
                       Your Name
                     </label>
                     <input
@@ -350,12 +344,12 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
                       placeholder="Jane Smith"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-white/40 mb-1.5">
+                    <label className="block text-sm text-white/35 mb-1.5">
                       Email
                     </label>
                     <input
@@ -365,14 +359,14 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
                       placeholder="jane@agency.com"
                     />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm text-white/40 mb-1.5">
+                    <label className="block text-sm text-white/35 mb-1.5">
                       Agency Name
                     </label>
                     <input
@@ -382,12 +376,12 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, agency: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
                       placeholder="Smith Insurance Group"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-white/40 mb-1.5">
+                    <label className="block text-sm text-white/35 mb-1.5">
                       Phone (optional)
                     </label>
                     <input
@@ -396,7 +390,7 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
                       placeholder="(555) 123-4567"
                     />
                   </div>
@@ -404,7 +398,7 @@ export default function LandingPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-amber-500 hover:bg-amber-400 text-[#0A0F1A] font-bold text-base py-4 rounded-xl transition-all hover:scale-[1.01] shadow-lg shadow-amber-500/20 disabled:opacity-50 cursor-pointer"
+                  className="w-full bg-[#C4836A] hover:bg-[#D4937A] text-white font-bold text-base py-4 rounded-xl transition-all hover:scale-[1.01] shadow-lg shadow-[#C4836A]/20 disabled:opacity-50 cursor-pointer"
                 >
                   {submitting ? "Sending..." : "Get My Free Preview"}
                 </button>
@@ -420,12 +414,10 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-white/5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
-              <span className="text-[#0A0F1A] font-bold text-[10px]">AB</span>
-            </div>
-            <span className="text-sm text-white/30">
-              &copy; {new Date().getFullYear()} AgencyBrain Pages
+          <div className="flex items-center gap-3">
+            <img src="/logo.png" alt="AgencyBrain Pages" className="h-6" />
+            <span className="text-sm text-white/25">
+              &copy; {new Date().getFullYear()}
             </span>
           </div>
           <div className="flex items-center gap-6 text-sm text-white/20">

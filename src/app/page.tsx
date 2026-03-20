@@ -82,7 +82,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#080B12] text-white">
+    <div className="min-h-screen bg-[#1b1d33] text-white">
       {/* Nav */}
       <nav className="border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -100,7 +100,7 @@ export default function LandingPage() {
             </Link>
             <a
               href="#contact"
-              className="bg-[#C4836A] hover:bg-[#D4937A] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
+              className="bg-[#b74b2a] hover:bg-[#c95d3c] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
             >
               Get Started
             </a>
@@ -110,19 +110,19 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#C4836A]/8 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-40 right-1/4 w-[400px] h-[400px] bg-[#8B5E4B]/6 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#b74b2a]/8 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-40 right-1/4 w-[400px] h-[400px] bg-[#8f3520]/6 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-20 text-center relative">
           <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8">
-            <span className="w-2 h-2 bg-[#C4836A] rounded-full animate-pulse" />
+            <span className="w-2 h-2 bg-[#b74b2a] rounded-full animate-pulse" />
             <span className="text-sm text-white/50">Now accepting agencies for Q2 2026</span>
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6 max-w-4xl mx-auto">
             Insurance Websites
             <br />
-            <span className="bg-gradient-to-r from-[#C4836A] via-[#D4937A] to-[#B8755F] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#b74b2a] via-[#c95d3c] to-[#a34024] bg-clip-text text-transparent">
               That Actually Sell
             </span>
           </h1>
@@ -135,7 +135,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-16">
             <a
               href="#contact"
-              className="bg-[#C4836A] hover:bg-[#D4937A] text-white font-bold text-base px-8 py-4 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#C4836A]/20"
+              className="bg-[#b74b2a] hover:bg-[#c95d3c] text-white font-bold text-base px-8 py-4 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#b74b2a]/20"
             >
               Request a Preview
             </a>
@@ -154,7 +154,7 @@ export default function LandingPage() {
                 key={s.label}
                 className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-5"
               >
-                <div className="text-2xl md:text-3xl font-bold text-[#C4836A] mb-1">
+                <div className="text-2xl md:text-3xl font-bold text-[#b74b2a] mb-1">
                   {s.value}
                 </div>
                 <div className="text-xs text-white/35 uppercase tracking-wider">
@@ -167,7 +167,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="border-t border-white/5 bg-[#0A0D15]">
+      <section className="border-t border-white/5 bg-[#1e2038]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -183,9 +183,9 @@ export default function LandingPage() {
             {FEATURES.map((f) => (
               <div
                 key={f.title}
-                className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-7 hover:border-[#C4836A]/20 transition-colors group"
+                className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-7 hover:border-[#b74b2a]/20 transition-colors group"
               >
-                <div className="w-11 h-11 rounded-xl bg-[#C4836A]/10 text-[#C4836A] flex items-center justify-center mb-4 group-hover:bg-[#C4836A]/15 transition-colors">
+                <div className="w-11 h-11 rounded-xl bg-[#b74b2a]/10 text-[#b74b2a] flex items-center justify-center mb-4 group-hover:bg-[#b74b2a]/15 transition-colors">
                   {f.icon}
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
@@ -213,7 +213,7 @@ export default function LandingPage() {
             {TEMPLATES.map((t) => (
               <div
                 key={t.name}
-                className="group bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden hover:border-[#C4836A]/25 transition-all hover:shadow-xl hover:shadow-[#C4836A]/5"
+                className="group bg-white/[0.02] border border-white/[0.06] rounded-2xl overflow-hidden hover:border-[#b74b2a]/25 transition-all hover:shadow-xl hover:shadow-[#b74b2a]/5"
               >
                 <div className="relative h-52 overflow-hidden bg-white/[0.02]">
                   <img
@@ -228,7 +228,7 @@ export default function LandingPage() {
                         t.tier === "Standard"
                           ? "bg-white/10 text-white/70 border border-white/10"
                           : t.tier === "Premium"
-                          ? "bg-[#C4836A]/20 text-[#D4937A] border border-[#C4836A]/20"
+                          ? "bg-[#b74b2a]/20 text-[#c95d3c] border border-[#b74b2a]/20"
                           : "bg-purple-500/20 text-purple-300 border border-purple-500/20"
                       }`}
                     >
@@ -249,7 +249,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="border-t border-white/5 bg-[#0A0D15]">
+      <section className="border-t border-white/5 bg-[#1e2038]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -263,19 +263,19 @@ export default function LandingPage() {
                 step: "01",
                 title: "Tell Us About Your Agency",
                 desc: "Fill out a quick form with your info, team, services, and branding. Upload your logo and photos.",
-                color: "from-[#C4836A] to-[#A86B54]",
+                color: "from-[#004aad] to-[#0060d0]",
               },
               {
                 step: "02",
                 title: "We Build & You Preview",
                 desc: "We configure your chosen template with your real data and deploy a preview within 48 hours.",
-                color: "from-[#D4937A] to-[#C4836A]",
+                color: "from-[#b74b2a] to-[#c95d3c]",
               },
               {
                 step: "03",
                 title: "Approve & Go Live",
                 desc: "Review your site, request any tweaks, and we push it live on your custom domain.",
-                color: "from-[#B8755F] to-[#9B6350]",
+                color: "from-[#2db86a] to-[#80ffb1]",
               },
             ].map((s) => (
               <div key={s.step} className="text-center">
@@ -309,10 +309,10 @@ export default function LandingPage() {
             </div>
 
             {submitted ? (
-              <div className="bg-[#C4836A]/10 border border-[#C4836A]/20 rounded-2xl p-10 text-center">
-                <div className="w-14 h-14 bg-[#C4836A]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="bg-[#80ffb1]/10 border border-[#80ffb1]/20 rounded-2xl p-10 text-center">
+                <div className="w-14 h-14 bg-[#80ffb1]/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg
-                    className="w-7 h-7 text-[#C4836A]"
+                    className="w-7 h-7 text-[#80ffb1]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -344,7 +344,7 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#b74b2a]/50 focus:ring-1 focus:ring-[#b74b2a]/20 transition-colors"
                       placeholder="Jane Smith"
                     />
                   </div>
@@ -359,7 +359,7 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#b74b2a]/50 focus:ring-1 focus:ring-[#b74b2a]/20 transition-colors"
                       placeholder="jane@agency.com"
                     />
                   </div>
@@ -376,7 +376,7 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, agency: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#b74b2a]/50 focus:ring-1 focus:ring-[#b74b2a]/20 transition-colors"
                       placeholder="Smith Insurance Group"
                     />
                   </div>
@@ -390,7 +390,7 @@ export default function LandingPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#C4836A]/50 focus:ring-1 focus:ring-[#C4836A]/20 transition-colors"
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#b74b2a]/50 focus:ring-1 focus:ring-[#b74b2a]/20 transition-colors"
                       placeholder="(555) 123-4567"
                     />
                   </div>
@@ -398,7 +398,7 @@ export default function LandingPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-[#C4836A] hover:bg-[#D4937A] text-white font-bold text-base py-4 rounded-xl transition-all hover:scale-[1.01] shadow-lg shadow-[#C4836A]/20 disabled:opacity-50 cursor-pointer"
+                  className="w-full bg-[#b74b2a] hover:bg-[#c95d3c] text-white font-bold text-base py-4 rounded-xl transition-all hover:scale-[1.01] shadow-lg shadow-[#b74b2a]/20 disabled:opacity-50 cursor-pointer"
                 >
                   {submitting ? "Sending..." : "Get My Free Preview"}
                 </button>

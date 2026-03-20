@@ -89,7 +89,7 @@ export default function LandingPage() {
           <img
             src="/logo.png"
             alt="AgencyBrain Pages"
-            className="h-8 sm:h-10"
+            className="h-10 sm:h-14 w-auto"
           />
           <div className="flex items-center gap-4">
             <Link

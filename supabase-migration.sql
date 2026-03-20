@@ -17,3 +17,8 @@ ALTER TABLE submissions ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'new';
 
 -- Update any existing rows without a status
 UPDATE submissions SET status = 'new' WHERE status IS NULL;
+
+-- Deployment automation tracking
+ALTER TABLE submissions ADD COLUMN IF NOT EXISTS vercel_project_id TEXT;
+ALTER TABLE submissions ADD COLUMN IF NOT EXISTS vercel_deployment_id TEXT;
+ALTER TABLE submissions ADD COLUMN IF NOT EXISTS deployed_at TIMESTAMPTZ;

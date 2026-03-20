@@ -30,6 +30,12 @@ const TEMPLATE_LABELS: Record<string, string> = {
   heritage: "Heritage",
   momentum: "Momentum",
   prestige: "Prestige",
+  apex: "Apex",
+  cornerstone: "Cornerstone",
+  summit: "Summit",
+  vanguard: "Vanguard",
+  forge: "Forge",
+  meridian: "Meridian",
 };
 
 export default function AdminDashboard() {

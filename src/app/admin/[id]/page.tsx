@@ -224,7 +224,7 @@ export default function AgencyDetailPage() {
         )}
         {activeTab === "deploy" && (
           <ConfigGenerator
-            agency={agency}
+            agency={{ ...agency, id }}
             onUpdateField={updateField}
           />
         )}

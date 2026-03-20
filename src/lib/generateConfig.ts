@@ -202,6 +202,7 @@ const config: AgencyConfig = {
   serviceAreas: ${JSON.stringify(serviceAreas)},
 
   formspreeId: ${JSON.stringify(agency.formspree_id || "REPLACE_ME")},
+  gaMeasurementId: ${JSON.stringify(agency.ga_measurement_id || "")},
 };
 
 export default config;

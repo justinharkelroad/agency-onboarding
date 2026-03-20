@@ -82,14 +82,14 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0C0E14] text-white">
+    <div className="min-h-screen bg-[#080B12] text-white">
       {/* Nav */}
       <nav className="border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <img
             src="/logo.png"
             alt="AgencyBrain Pages"
-            className="h-10 sm:h-14 w-auto"
+            className="h-10 sm:h-14 w-auto brightness-[2] contrast-[1.1]"
           />
           <div className="flex items-center gap-4">
             <Link
@@ -167,7 +167,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="border-t border-white/5 bg-[#0E1018]">
+      <section className="border-t border-white/5 bg-[#0A0D15]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -249,7 +249,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="border-t border-white/5 bg-[#0E1018]">
+      <section className="border-t border-white/5 bg-[#0A0D15]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -415,7 +415,7 @@ export default function LandingPage() {
       <footer className="border-t border-white/5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="AgencyBrain Pages" className="h-6" />
+            <img src="/logo.png" alt="AgencyBrain Pages" className="h-6 w-auto brightness-[2] contrast-[1.1]" />
             <span className="text-sm text-white/25">
               &copy; {new Date().getFullYear()}
             </span>

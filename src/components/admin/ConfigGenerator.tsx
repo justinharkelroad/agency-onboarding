@@ -20,6 +20,9 @@ export default function ConfigGenerator({
     url?: string;
     error?: string;
   }>({});
+  const [customDomain, setCustomDomain] = useState("");
+  const [domainState, setDomainState] = useState<"idle" | "adding" | "success" | "error">("idle");
+  const [domainMessage, setDomainMessage] = useState("");
 
   // Deployment settings fields
   const [formspreeId, setFormspreeId] = useState(agency.formspree_id || "");
@@ -158,6 +161,64 @@ export default function ConfigGenerator({
           >
             {deployState === "deploying" ? "Redeploying..." : "Redeploy"}
           </button>
+        </div>
+      )}
+
+      {/* Custom Domain */}
+      {agency.vercel_project_id && (
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h3 className="font-semibold text-gray-900 mb-2">Custom Domain</h3>
+          <p className="text-gray-500 text-sm mb-4">
+            Add a custom domain to this agency&apos;s site. Make sure DNS is pointed to Vercel first
+            (A record → 76.76.21.21, CNAME www → cname.vercel-dns.com).
+          </p>
+          <div className="flex gap-3">
+            <input
+              type="text"
+              value={customDomain}
+              onChange={(e) => setCustomDomain(e.target.value)}
+              placeholder="www.smithinsurance.com"
+              className="flex-1 border border-gray-300 rounded-lg py-2.5 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              onClick={async () => {
+                if (!customDomain.trim()) return;
+                setDomainState("adding");
+                setDomainMessage("");
+                try {
+                  const res = await fetch("/api/domain", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      projectId: agency.vercel_project_id,
+                      domain: customDomain.trim().replace(/^https?:\/\//, ""),
+                    }),
+                  });
+                  const data = await res.json();
+                  if (res.ok) {
+                    setDomainState("success");
+                    setDomainMessage(`Added ${data.domain}. ${data.verified ? "Verified and active." : "DNS verification pending."}`);
+                    onUpdateField("domain_preferred", customDomain.trim());
+                  } else {
+                    setDomainState("error");
+                    setDomainMessage(data.error || "Failed to add domain");
+                  }
+                } catch {
+                  setDomainState("error");
+                  setDomainMessage("Network error");
+                }
+              }}
+              disabled={domainState === "adding"}
+              className="bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer disabled:opacity-50 whitespace-nowrap"
+            >
+              {domainState === "adding" ? "Adding..." : "Add Domain"}
+            </button>
+          </div>
+          {domainMessage && (
+            <div className={`mt-3 text-sm ${domainState === "success" ? "text-green-600" : "text-red-600"}`}>
+              {domainMessage}
+            </div>
+          )}
         </div>
       )}
 

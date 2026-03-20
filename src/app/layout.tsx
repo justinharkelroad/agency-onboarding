@@ -15,9 +15,9 @@ const dmSerif = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Agency Onboarding | Get Your Website Started",
+  title: "AgencyBrain Pages | Insurance Websites That Actually Sell",
   description:
-    "Complete this form to get your insurance agency website built and launched.",
+    "Premium, conversion-optimized websites for P&C insurance agencies. 9 templates, 48-hour launch, built around your brand.",
 };
 
 export default function RootLayout({

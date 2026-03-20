@@ -137,7 +137,7 @@ export default function LandingPage() {
               href="#contact"
               className="bg-[#b74b2a] hover:bg-[#c95d3c] text-white font-bold text-base px-8 py-4 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#b74b2a]/20"
             >
-              Request a Preview
+              Get Started
             </a>
             <a
               href="#templates"
@@ -303,8 +303,8 @@ export default function LandingPage() {
                 Ready to Stand Out?
               </h2>
               <p className="text-white/35">
-                Tell us a bit about your agency and we&apos;ll reach out with a
-                personalized preview of what your site could look like.
+                Tell us a bit about your agency and we&apos;ll be in touch
+                to discuss how we can build your perfect site.
               </p>
             </div>
 
@@ -327,7 +327,7 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-xl font-semibold mb-2">We&apos;ll Be in Touch</h3>
                 <p className="text-white/40 text-sm">
-                  Expect a personalized mockup in your inbox within 24 hours.
+                  We&apos;ll reach out within one business day to get started.
                 </p>
               </div>
             ) : (
@@ -400,10 +400,10 @@ export default function LandingPage() {
                   disabled={submitting}
                   className="w-full bg-[#b74b2a] hover:bg-[#c95d3c] text-white font-bold text-base py-4 rounded-xl transition-all hover:scale-[1.01] shadow-lg shadow-[#b74b2a]/20 disabled:opacity-50 cursor-pointer"
                 >
-                  {submitting ? "Sending..." : "Get My Free Preview"}
+                  {submitting ? "Sending..." : "Let\u2019s Talk"}
                 </button>
                 <p className="text-center text-xs text-white/20">
-                  No commitment. We&apos;ll send you a personalized mockup within 24 hours.
+                  No commitment. Just a conversation about your agency&apos;s online presence.
                 </p>
               </form>
             )}

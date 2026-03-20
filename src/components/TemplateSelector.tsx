@@ -21,7 +21,7 @@ const TIERS = [
           "Navy & gold editorial layout. Serif headings, clean structure. Projects trust and legacy.",
         photoSummary: "1 hero photo + team headshots",
         screenshot:
-          "/templates/heritage.png",
+          "/templates/heritage.webp",
         colors: { bg: "#1A3A5C", accent: "#C9963B" },
       },
       {
@@ -32,7 +32,7 @@ const TIERS = [
           "Bold sans-serif type, photo collage grid. Energetic and SaaS-inspired feel.",
         photoSummary: "4-6 lifestyle photos + team headshots",
         screenshot:
-          "/templates/momentum.png",
+          "/templates/momentum.webp",
         colors: { bg: "#0F172A", accent: "#5B8DB8" },
       },
       {
@@ -43,7 +43,7 @@ const TIERS = [
           "Dark charcoal & gold. Elegant serif typography. Luxury brand meets insurance.",
         photoSummary: "1 hero photo + 1 lifestyle + team headshots",
         screenshot:
-          "/templates/prestige.png",
+          "/templates/prestige.webp",
         colors: { bg: "#2D2D2D", accent: "#C9963B" },
       },
     ],
@@ -61,7 +61,7 @@ const TIERS = [
           "Stripe-inspired. Gradient glass cards, split hero with quote form. Built to convert.",
         photoSummary: "1 hero photo + team headshots",
         screenshot:
-          "/templates/apex.png",
+          "/templates/apex.webp",
         colors: { bg: "#1A2A3A", accent: "#20B2AA" },
       },
       {
@@ -72,7 +72,7 @@ const TIERS = [
           "Monocle-inspired. Forest green & copper, asymmetric layout, pull-quotes.",
         photoSummary: "2-3 editorial photos + team headshots",
         screenshot:
-          "/templates/cornerstone.png",
+          "/templates/cornerstone.webp",
         colors: { bg: "#1B4332", accent: "#B87333" },
       },
       {
@@ -83,7 +83,7 @@ const TIERS = [
           "Massive whitespace, single focal point per section. Premium through restraint.",
         photoSummary: "1 hero photo + 1 team photo",
         screenshot:
-          "/templates/summit.png",
+          "/templates/summit.webp",
         colors: { bg: "#F5F3EF", accent: "#E8913A" },
       },
     ],
@@ -101,7 +101,7 @@ const TIERS = [
           "Electric violet & neon lime. Kinetic typography, dramatic layouts. Show-stopper.",
         photoSummary: "3-4 dramatic photos + team headshots",
         screenshot:
-          "/templates/vanguard.png",
+          "/templates/vanguard.webp",
         colors: { bg: "#0A0A0A", accent: "#7C3AED" },
       },
       {
@@ -112,7 +112,7 @@ const TIERS = [
           "Blueprint cards, hand-drawn accents, burnt sienna. Handcrafted premium feel.",
         photoSummary: "2-3 candid/authentic photos + team",
         screenshot:
-          "/templates/forge.png",
+          "/templates/forge.webp",
         colors: { bg: "#F2EDE4", accent: "#C75B39" },
       },
       {
@@ -123,7 +123,7 @@ const TIERS = [
           "Dark mode sci-fi. Holographic cards, cyan glow, dashboard widgets. Agency from 2030.",
         photoSummary: "1-2 photos + team headshots",
         screenshot:
-          "/templates/meridian.png",
+          "/templates/meridian.webp",
         colors: { bg: "#0B1426", accent: "#06B6D4" },
       },
     ],

@@ -4,15 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 
 const TEMPLATES = [
-  { name: "Heritage", tier: "Standard", img: "/templates/heritage.png", desc: "Classic & Professional" },
-  { name: "Momentum", tier: "Standard", img: "/templates/momentum.png", desc: "Bold & Modern" },
-  { name: "Prestige", tier: "Standard", img: "/templates/prestige.png", desc: "Premium & Editorial" },
-  { name: "Apex", tier: "Premium", img: "/templates/apex.png", desc: "Conversion-Optimized" },
-  { name: "Cornerstone", tier: "Premium", img: "/templates/cornerstone.png", desc: "Magazine Editorial" },
-  { name: "Summit", tier: "Premium", img: "/templates/summit.png", desc: "Apple-Minimal" },
-  { name: "Vanguard", tier: "Elite", img: "/templates/vanguard.png", desc: "Cinematic & Bold" },
-  { name: "Forge", tier: "Elite", img: "/templates/forge.png", desc: "Industrial & Artisanal" },
-  { name: "Meridian", tier: "Elite", img: "/templates/meridian.png", desc: "Futuristic & High-Tech" },
+  { name: "Heritage", tier: "Standard", img: "/templates/heritage.webp", desc: "Classic & Professional" },
+  { name: "Momentum", tier: "Standard", img: "/templates/momentum.webp", desc: "Bold & Modern" },
+  { name: "Prestige", tier: "Standard", img: "/templates/prestige.webp", desc: "Premium & Editorial" },
+  { name: "Apex", tier: "Premium", img: "/templates/apex.webp", desc: "Conversion-Optimized" },
+  { name: "Cornerstone", tier: "Premium", img: "/templates/cornerstone.webp", desc: "Magazine Editorial" },
+  { name: "Summit", tier: "Premium", img: "/templates/summit.webp", desc: "Apple-Minimal" },
+  { name: "Vanguard", tier: "Elite", img: "/templates/vanguard.webp", desc: "Cinematic & Bold" },
+  { name: "Forge", tier: "Elite", img: "/templates/forge.webp", desc: "Industrial & Artisanal" },
+  { name: "Meridian", tier: "Elite", img: "/templates/meridian.webp", desc: "Futuristic & High-Tech" },
 ];
 
 const STATS = [

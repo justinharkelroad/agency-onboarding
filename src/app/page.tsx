@@ -92,12 +92,6 @@ export default function LandingPage() {
             className="h-10 sm:h-14 w-auto brightness-[2] contrast-[1.1]"
           />
           <div className="flex items-center gap-4">
-            <Link
-              href="/onboard"
-              className="hidden sm:inline text-sm text-white/40 hover:text-white transition-colors"
-            >
-              Client Portal
-            </Link>
             <a
               href="#contact"
               className="bg-[#b74b2a] hover:bg-[#c95d3c] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
@@ -420,14 +414,9 @@ export default function LandingPage() {
               &copy; {new Date().getFullYear()}
             </span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-white/20">
-            <Link href="/onboard" className="hover:text-white/40 transition-colors">
-              Client Onboarding
-            </Link>
-            <Link href="/admin" className="hover:text-white/40 transition-colors">
-              Admin
-            </Link>
-          </div>
+          <span className="text-sm text-white/20">
+            Premium insurance agency websites
+          </span>
         </div>
       </footer>
     </div>

@@ -123,6 +123,17 @@ async function ensureVercelProject(
   }
 
   const project = await createRes.json();
+
+  // Disable SSO/deployment protection so agency sites are publicly accessible
+  await fetch(`${VERCEL_API}/v9/projects/${project.id}${params}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${vercelToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ssoProtection: null }),
+  });
+
   return project.id;
 }
 

@@ -276,27 +276,45 @@ export async function POST(request: Request) {
     }
 
     const deployment = await deployRes.json();
-
-    // 8. Promote this deployment to production so the stable URL points to it
     const deployId = deployment.uid || deployment.id;
-    const aliasParams = teamId ? `?teamId=${teamId}` : "";
 
-    // Assign the stable .vercel.app alias
+    // 8. Wait for the build to finish before aliasing
+    let buildState = "BUILDING";
+    for (let i = 0; i < 40; i++) {
+      await new Promise((r) => setTimeout(r, 3000));
+      const checkRes = await fetch(`${VERCEL_API}/v13/deployments/${deployId}`, {
+        headers: { Authorization: `Bearer ${vercelToken}` },
+      });
+      if (checkRes.ok) {
+        const checkData = await checkRes.json();
+        buildState = checkData.readyState || checkData.state;
+        if (buildState === "READY" || buildState === "ERROR") break;
+      }
+    }
+
+    if (buildState === "ERROR") {
+      return NextResponse.json(
+        { error: "Build failed on Vercel. Check the template for errors." },
+        { status: 500 }
+      );
+    }
+
+    // 9. Now alias to stable URLs (build is READY)
+    const aliasParams = teamId ? `?teamId=${teamId}` : "";
+    const subdomain = `${slug}.agencybrainpages.com`;
+
     await fetch(`${VERCEL_API}/v2/deployments/${deployId}/aliases${aliasParams}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${vercelToken}`, "Content-Type": "application/json" },
       body: JSON.stringify({ alias: `${slug}.vercel.app` }),
     });
 
-    // 9. Also assign the agencybrainpages.com subdomain
-    const subdomain = `${slug}.agencybrainpages.com`;
     await fetch(`${VERCEL_API}/v2/deployments/${deployId}/aliases${aliasParams}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${vercelToken}`, "Content-Type": "application/json" },
       body: JSON.stringify({ alias: subdomain }),
     });
 
-    // Also ensure the domain is on the project
     await assignDomain(projectId, subdomain, vercelToken, teamId);
 
     // 10. Use the stable subdomain as the deployed URL (not per-deploy URL)

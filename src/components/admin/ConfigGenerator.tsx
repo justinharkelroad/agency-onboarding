@@ -23,6 +23,8 @@ export default function ConfigGenerator({
   const [customDomain, setCustomDomain] = useState("");
   const [domainState, setDomainState] = useState<"idle" | "adding" | "success" | "error">("idle");
   const [domainMessage, setDomainMessage] = useState("");
+  const [previews, setPreviews] = useState<Array<{ template: string; url: string }>>((agency as any).previews || []);
+  const [previewLoading, setPreviewLoading] = useState<string | null>(null);
 
   // Deployment settings fields
   const [formspreeId, setFormspreeId] = useState(agency.formspree_id || "");
@@ -163,6 +165,81 @@ export default function ConfigGenerator({
           </button>
         </div>
       )}
+
+      {/* Template Previews */}
+      <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <h3 className="font-semibold text-gray-900 mb-2">Template Previews</h3>
+        <p className="text-gray-500 text-sm mb-4">
+          Generate preview links for different templates. Each gets its own URL so the client can compare side by side.
+        </p>
+
+        <div className="flex flex-wrap gap-2 mb-4">
+          {["starter","heritage","momentum","prestige","apex","cornerstone","summit","vanguard","forge","meridian"].map((t) => {
+            const isLoading = previewLoading === t;
+            const existing = previews.find((p) => p.template === t);
+            return (
+              <button
+                key={t}
+                disabled={isLoading}
+                onClick={async () => {
+                  setPreviewLoading(t);
+                  try {
+                    const res = await fetch("/api/preview", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ submissionId: agency.id, template: t }),
+                    });
+                    const data = await res.json();
+                    if (res.ok && data.url) {
+                      const updated = [...previews.filter((p) => p.template !== t), { template: t, url: data.url }];
+                      setPreviews(updated);
+                      onUpdateField("previews", updated);
+                    }
+                  } catch { /* ignore */ }
+                  setPreviewLoading(null);
+                }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer disabled:opacity-50 ${
+                  existing
+                    ? "bg-blue-50 text-blue-700 border border-blue-200"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-200"
+                }`}
+              >
+                {isLoading ? "Building..." : existing ? `${t} ✓` : t}
+              </button>
+            );
+          })}
+        </div>
+
+        {previews.length > 0 && (
+          <div className="space-y-2">
+            {previews.map((p) => (
+              <div key={p.template} className="flex items-center justify-between bg-gray-50 rounded-lg px-4 py-3">
+                <div>
+                  <span className="font-medium text-gray-900 text-sm capitalize">{p.template}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 text-sm hover:underline"
+                  >
+                    {p.url.replace("https://", "").slice(0, 50)}...
+                  </a>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(p.url);
+                    }}
+                    className="text-xs text-gray-400 hover:text-gray-600 cursor-pointer"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* Custom Domain */}
       {agency.vercel_project_id && (

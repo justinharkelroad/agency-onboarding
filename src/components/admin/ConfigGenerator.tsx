@@ -4,7 +4,7 @@ import { useState } from "react";
 import { generateConfigTS, type AgencyData } from "@/lib/generateConfig";
 
 interface ConfigGeneratorProps {
-  agency: AgencyData & { id: string; status: string };
+  agency: AgencyData & { id: string; status: string; vercel_project_id?: string; deployed_url?: string | null };
   onUpdateField: (field: string, value: unknown) => void;
 }
 

@@ -23,6 +23,21 @@ interface Tier {
 
 const tiers: Tier[] = [
   {
+    name: "Starter",
+    badge: "Landing Page",
+    badgeBg: "bg-green-100",
+    badgeText: "text-green-700",
+    borderSelected: "border-green-500 ring-green-500/20",
+    templates: [
+      {
+        id: "starter",
+        name: "Starter",
+        description: "Click-to-call landing page. Hero + quote form + services + trust signals. Built for Google Ads.",
+        colors: { bg: "#FFFFFF", accent: "#2563EB" },
+      },
+    ],
+  },
+  {
     name: "Standard",
     badge: "Standard",
     badgeBg: "bg-blue-100",

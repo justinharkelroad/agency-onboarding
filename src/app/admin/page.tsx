@@ -27,6 +27,7 @@ const STATUS_STYLES: Record<string, string> = {
 };
 
 const TEMPLATE_LABELS: Record<string, string> = {
+  starter: "Starter",
   heritage: "Heritage",
   momentum: "Momentum",
   prestige: "Prestige",

@@ -9,6 +9,23 @@ interface TemplateSelectorProps {
 
 const TIERS = [
   {
+    name: "Starter",
+    badge: "Landing Page",
+    badgeColor: "bg-green-100 text-green-700",
+    templates: [
+      {
+        id: "starter",
+        name: "Starter",
+        subtitle: "Click-to-Call Landing Page",
+        description:
+          "Lean, conversion-focused single page. Hero with quote form, services strip, trust signals, and big call button. Built for Google Ads.",
+        photoSummary: "Logo only (no photos needed)",
+        screenshot: "/templates/heritage.webp",
+        colors: { bg: "#FFFFFF", accent: "#2563EB" },
+      },
+    ],
+  },
+  {
     name: "Standard",
     badge: "Included",
     badgeColor: "bg-blue-100 text-blue-700",

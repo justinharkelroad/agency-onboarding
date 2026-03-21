@@ -277,16 +277,30 @@ export async function POST(request: Request) {
 
     const deployment = await deployRes.json();
 
-    // 8. The deployment URL is directly accessible once built
-    // Use the Vercel-assigned URL which auto-updates for the project
-    const deploymentUrl = `https://${deployment.url}`;
+    // 8. Promote this deployment to production so the stable URL points to it
+    const deployId = deployment.uid || deployment.id;
+    const aliasParams = teamId ? `?teamId=${teamId}` : "";
 
-    // 9. Also try custom domain (will silently fail if not owned)
+    // Assign the stable .vercel.app alias
+    await fetch(`${VERCEL_API}/v2/deployments/${deployId}/aliases${aliasParams}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${vercelToken}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ alias: `${slug}.vercel.app` }),
+    });
+
+    // 9. Also assign the agencybrainpages.com subdomain
     const subdomain = `${slug}.agencybrainpages.com`;
+    await fetch(`${VERCEL_API}/v2/deployments/${deployId}/aliases${aliasParams}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${vercelToken}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ alias: subdomain }),
+    });
+
+    // Also ensure the domain is on the project
     await assignDomain(projectId, subdomain, vercelToken, teamId);
 
-    // 10. Update database with the direct deployment URL
-    const deployedUrl = deploymentUrl;
+    // 10. Use the stable subdomain as the deployed URL (not per-deploy URL)
+    const deployedUrl = `https://${subdomain}`;
     await supabase
       .from("submissions")
       .update({
